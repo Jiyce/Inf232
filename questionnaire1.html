@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+    <body>
+    <div class="container">
+
+    <h1><i>QUESTIONNAIRE DE SANTÉ SEXUELLE ET REPRODUCTIVE</i></h1>
+        <p>Veuillez répondre aux questions suivantes :</p>
+        
+        <form method="post" action="/questionnaire2">
+        
+        <h2><i>Page 1 du questionnaire</i></h2>
+        
+        <ul>
+        <li>
+        <label>1. Age : </label>
+            <select name="age" required>
+                <option value="15-19">15-19 ans</option>
+                <option value="20-25">20-25 ans</option>
+                <option value="25-30">25-30 ans</option>
+                <option value="30+">30 ans et plus</option>
+            </select><br><br>
+        </li>
+        
+        <li>
+        <label>2. Sexe 🚻️: </label>
+            <select name="sexe" required>
+                <option value="Homme">Homme♂️</option>
+                <option value="Femme">Femme♀️</option>
+            </select><br><br>
+        </li>
+        
+        <li>    
+        <label>3. Avez-vous déjà participez à une campagne de sensibilisation sur la santé sexuelle et reproductive ?</label>
+        <input type="radio" id="oui1" name="sensibilisation" value="Oui" >Oui
+        <input type="radio" id="non1" name="sensibilisation" value="Non" >Non<br><br>
+        </li>
+        
+        <li>
+        <label>4. Etes_vous sexuellement actif ?</label>
+        <input type="radio" id="oui2" name="dernier_rapport" value="Oui" required>
+        <label for="oui2">Oui</label>
+        <input type="radio" id="non2" name="dernier_rapport" value="Non" required>
+        <label for="non2">Non</label><br><br>
+        </li>
+        
+        <li>
+        <label>5. Combien de partenaires sexuels avez-vous eu au cours de votre vie ? :</label>
+            <select name="partenaires" required>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2-5">2-5</option>
+                <option value="5+">5 et plus</option>
+            </select><br><br>
+        </li>
+        
+        <li>
+        <label>6. Quelle méthode de contraception utilisez-vous ?</label>
+            <select name="contraception" required>
+                <option value="Aucune">Aucune</option>
+                <option value="Préservatif">Préservatif</option>
+                <option value="Pilule">Pilule</option>
+                <option value="Stérilet">Stérilet</option>
+                <option value="Autre">Autre</option>
+            </select><br><br>
+        </li>
+        
+        <li>
+        <label>7. Avez-vous déjà été testé pour les infections sexuellement transmissibles (ist) ?</label>
+            <input type="radio" id="oui3" name="ist" value="Oui" required>
+            <label for="oui3">Oui</label>
+            <input type="radio" id="non3" name="ist" value="Non" required>
+            <label for="non3">Non</label><br><br> 
+        </li>
+            
+        <li>
+        <label>8.  Quel âge aviez-vous lors de votre premier rapport sexuel ?</label>
+            <select name="age_premier_rapport">
+                <option value="">--Sélectionnez(facultatif)--</option>
+                <option value="Moins de 15 ans">Moins de 15 ans</option>
+                <option value="15-19 ans">15-19 ans</option>
+                <option value="20-25 ans">20-25 ans</option>
+                <option value="25 ans et plus">25 ans et plus</option>
+            </select><br><br>
+        </li>
+         
+        <li>
+            <label>9. Le préservatif est-il efficace pour prévenir les grossesses et les ist ?</label>
+            <input type="radio" id="oui4" name="preservatif" value="Oui" required>
+            <label for="oui4">Oui</label><br>
+            <input type="radio" id="non4" name="preservatif" value="Non" required>
+            <label for="non4">Non</label><br><br>
+        </li>
+        
+        <li>
+        <label>10. Quels sont les risques associés à une activité sexuelle non protégée ?</label>
+            <textarea name="risques" rows="4" cols="50" placeholder="Veuillez décrire les risques..." required></textarea><br><br>
+        </li>
+        
+        </ul>
+        
+        <input type= 'submit' value='Suivant' class="btn">
+        </form>
+    </div>
+    </body>
+</html>    

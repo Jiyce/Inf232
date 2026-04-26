@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+    <body>
+    <div class="container">
+         <h2> Page 2 du questionnaire</h2>
+        
+        <form method="post" action="/submit">
+        {hidden_inputs}
+        
+        <ul>
+        
+        <li>
+        <label>11. Selon vous qui sont les plus exposées au phénomène de la sexualité précoce ? Justifiez votre réponse.</label>
+            <textarea name="sexualite_precoce" rows="4" cols="50" placeholder="Veuillez décrire..." required></textarea><br><br>
+        </li>
+        
+        <li>
+        <label>12. Quels sont les facteurs qui peuvent influencer les comportements sexuels à risque chez les jeunes ?</label>
+            <textarea name="facteurs" rows="4" cols="50" placeholder="Veuillez décrire les facteurs..." required></textarea><br><br>
+        </li>
+        
+        <li>
+        <label>13. Quels sont les moyens de prévention que vous connaissez pour éviter les infections sexuellement transmissibles et les grossesses non désirées ?</label>
+            <textarea name="prevention" rows="4" cols="50" placeholder="Veuillez décrire les moyens de prévention..." required></textarea><br><br>
+        </li>
+        
+        <li>
+        <label>14. Quelles sont les différentes maladies sexuellement transmissibles (mst) que vous connaissez ?</label>
+            <textarea name="mst" rows="4" cols="50" placeholder="Veuillez lister les maladies..." required></textarea><br><br>
+        </li>
+        
+        <li>
+        <label>15. Avez-vous déjà consulter un professionnel de santé?</label>
+           <input type="radio" id="oui5" name="acces_sante" value="Oui" required>
+            <label for="oui5">Oui</label>
+            <input type="radio" id="non5" name="acces_sante" value="Non" required>
+            <label for="non5">Non</label><br><br>
+        </li>
+        
+        <li>
+        <label>16. A quelle fréquence consultez-vous un professionnel de santé ?</label>
+            <select name="frequence_sante" required>
+                <option value="Jamais">Jamais</option>
+                <option value="Rarement">Rarement</option>
+                <option value="Régulièrement">Régulièrement</option>
+            </select><br><br>
+        </li>
+        
+        <li>
+        <label>17. Quelles difficultés rencontrez-vous pour accéder aux services de santé  ?</label>
+            <textarea name="difficultes" rows="4" cols="50" placeholder="Veuillez décrire les difficultés..." required></textarea><br><br>
+        </li>
+
+        <li>
+        <label>18. Utilisez-vous toujours une protection lors de vos rapports sexuels ?</label>
+            <input type="radio" id="oui6" name="protection" value="Oui" required>
+            <label for="oui6">Oui</label>
+            <input type="radio" id="non6" name="protection" value="Non" required>
+            <label for="non6">Non</label><br><br>
+        </li>
+        
+        <li>
+        <label>19. Pensez-vous que l'éducation sexuelle est suffisante pour les jeunes ?</label>
+            <input type="radio" id="oui7" name="education" value="Oui" required>
+            <label for="oui7">Oui</label>
+            <input type="radio" id="non7" name="education" value="Non" required>
+            <label for="non7">Non</label><br><br>
+        </li>
+        
+        
+        <li>
+         <label>20. Comment amélioreriez-vous l'accès à l'éducation sexuelle et aux services de santé reproductive pour les jeunes ?</label>
+            <textarea name="amelioration" rows="4" cols="50" placeholder="Vos suggestions..." required></textarea><br><br>
+        </li>
+        </ul>
+            
+        <input type="submit" value="Soumettre">         
+        </form>
+        
+    </div>
+    </body>
+</html>
