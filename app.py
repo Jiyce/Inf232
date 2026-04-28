@@ -2,39 +2,100 @@ import streamlit as st
 import psycopg2
 from datetime import datetime
 
-# Configuration de la page
+# Configuration de la page (DOIT être en premier)
 st.set_page_config(page_title="Questionnaire Santé Sexuelle", page_icon="📋")
+
+# CSS personnalisé (après set_page_config)
+st.markdown("""
+<style>
+    /* Style principal - Fond bleu clair */
+    .stApp {
+        background-color: #e3f2fd;
+    }
+    
+    /* Titres - Bleu foncé */
+    h1, h2, h3 {
+        color: #1565c0 !important;
+        font-weight: 700 !important;
+    }
+    
+    /* Boutons - Bleu */
+    .stButton > button {
+        background-color: #1976d2 !important;
+        color: white !important;
+        border-radius: 8px;
+        border: none;
+        padding: 10px 25px;
+        font-weight: 600;
+    }
+    .stButton > button:hover {
+        background-color: #1565c0 !important;
+    }
+    
+    /* Sidebar - Gris clair */
+    [data-testid="stSidebar"] {
+        background-color: #f5f5f5;
+    }
+    
+    /* Metrics - Bleu */
+    [data-testid="stMetricValue"] {
+        font-size: 2.5rem !important;
+        color: #1976d2 !important;
+    }
+    
+    /* Divider */
+    hr {
+        border-color: #1976d2;
+    }
+    
+    /* Formulaires */
+    .stTextInput > div > div > input,
+    .stSelectbox > div > div > div,
+    .stTextArea > div > div > textarea {
+        border: 1px solid #1976d2 !important;
+    }
+</style>
+""", unsafe_allow_html=True)
 
 # Connexion à la base de données PostgreSQL
 @st.cache_resource
 def connexion_db():
     return psycopg2.connect(
-        host="db.xjsjifpburqlrzhlhjho.supabase.co",
-        user="postgres",
+        host="aws-0-eu-west-1.pooler.supabase.com",
+        user="postgres.xjsjifpburqlrzhlhjho",
         password="Flavimyfave!",
         database="postgres",
-        port=5432  
+        port="6543",
+        sslmode="require"
     )
 
 def get_connection():
     return psycopg2.connect(
-        host="db.xjsjifpburqlrzhlhjho.supabase.co",
-        user="postgres",
+        host="aws-0-eu-west-1.pooler.supabase.com",
+        user="postgres.xjsjifpburqlrzhlhjho",
         password="Flavimyfave!",
         database="postgres",
-        port=5432
+        port="6543",
+        sslmode="require"
     )
 
 # Initialiser l'état de la page
 if 'page' not in st.session_state:
-    st.session_state.page = 'accueil'
+    st.session_state.page = 'Accueil'
 
-# Sidebar pour la navigation
+# Sidebar pour la navigation avec état initial
+pages_list = ["Accueil", "Questionnaire", "Statistiques"]
+current_index = pages_list.index(st.session_state.page) if st.session_state.page in pages_list else 0
+
 st.sidebar.title("Navigation")
-page = st.sidebar.radio("Aller à", ["Accueil", "Questionnaire", "Statistiques"])
+page = st.sidebar.radio("Aller à", pages_list, index=current_index)
+
+# Mettre à jour l'état quand on clique dans le sidebar
+if page != st.session_state.page:
+    st.session_state.page = page
 
 # PAGE ACCUEIL
-if page == "Accueil":
+if st.session_state.page == "Accueil":
     st.title("📋 Questionnaire Santé Sexuelle")
     st.markdown("""
     Bienvenue dans notre questionnaire anonyme sur la santé sexuelle et reproductive.
@@ -46,11 +107,11 @@ if page == "Accueil":
     """)
     
     if st.button("Commencer le Questionnaire"):
-        st.session_state.page = 'questionnaire'
+        st.session_state.page = "Questionnaire"
         st.rerun()
 
 # PAGE QUESTIONNAIRE
-elif page == "Questionnaire":
+elif st.session_state.page == "Questionnaire":
     st.title("📝 Questionnaire")
     
     with st.form("questionnaire_form"):
@@ -137,7 +198,7 @@ elif page == "Questionnaire":
             st.balloons()
 
 # PAGE STATISTIQUES
-elif page == "Statistiques":
+elif st.session_state.page == "Statistiques":
     st.title("📊 Statistiques des Réponses")
     
     try:
