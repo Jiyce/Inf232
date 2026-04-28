@@ -1,4 +1,3 @@
-cherrypy
-mysql-connector-python
-gunicorn
+streamlit
+postgres-connector-python
 psycopg2-binary
