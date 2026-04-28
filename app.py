@@ -1,11 +1,23 @@
 import streamlit as st
 import psycopg2
 import os
+import csv
 from dotenv import load_dotenv
 from datetime import datetime
 
 # Charger les variables d'environnement
 load_dotenv()
+
+# Fonction pour exporter en CSV
+def exporter_csv():
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM reponses")
+    rows = cursor.fetchall()
+    cursor.execute("SELECT column_name FROM information_schema.columns WHERE table_name = 'reponses'")
+    columns = [col[0] for col in cursor.fetchall()]
+    conn.close()
+    return columns, rows
 
 # Configuration de la page (DOIT être en premier)
 st.set_page_config(page_title="Questionnaire Santé Sexuelle", page_icon="📋")
@@ -251,6 +263,28 @@ elif st.session_state.page == "Statistiques":
         st.error(f"Erreur de connexion à la base de données : {err}")
     except Exception as e:
         st.error(f"Erreur : {e}")
+    
+    # Bouton pour télécharger CSV
+    st.divider()
+    st.subheader("📥 Télécharger les données")
+    
+    if st.button("Exporter en CSV"):
+        try:
+            columns, rows = exporter_csv()
+            # Créer le CSV
+            csv_data = ",".join(columns) + "\n"
+            for row in rows:
+                csv_data += ",".join([str(val) for val in row]) + "\n"
+            
+            st.download_button(
+                label="📥 Télécharger fichier CSV",
+                data=csv_data,
+                file_name="reponses_questionnaire.csv",
+                mime="text/csv"
+            )
+            st.success("✅ Fichier CSV prêt!")
+        except Exception as e:
+            st.error(f"Erreur: {e}")
 
 # Instructions pour lancer l'app
 st.sidebar.markdown("---")
