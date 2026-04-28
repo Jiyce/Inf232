@@ -2,11 +2,7 @@ import streamlit as st
 import psycopg2
 import os
 import csv
-from dotenv import load_dotenv
 from datetime import datetime
-
-# Charger les variables d'environnement
-load_dotenv()
 
 # Fonction pour exporter en CSV
 def exporter_csv():
@@ -78,8 +74,8 @@ st.markdown("""
 @st.cache_resource
 def connexion_db():
     return psycopg2.connect(
-       os.getenv("DATABASE_URL"),
-        sslmode="require" 
+        os.getenv("DATABASE_URL"),
+        sslmode="require"
     )
 
 def get_connection():
