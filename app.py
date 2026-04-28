@@ -239,8 +239,8 @@ elif st.session_state.page == "Questionnaire":
                 conn.commit()
                 conn.close()
             
-            st.success("✅ Merci ! Vos réponses ont été enregistrées avec succès !")
-            st.balloons()
+                st.success("✅ Merci ! Vos réponses ont été enregistrées avec succès !")
+                st.balloons()
 
 # PAGE STATISTIQUES
 elif st.session_state.page == "Statistiques":
