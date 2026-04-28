@@ -217,24 +217,27 @@ elif st.session_state.page == "Questionnaire":
         submitted = st.form_submit_button("Soumettre")
         
         if submitted:
-            conn = get_connection()
-            cursor = conn.cursor()
-            
             if not amelioration or not sexualite_precoce or not facteurs or not risques or not difficultes or not prevention or not mst or not ist or not age or not sexe or not sensibilisation or not dernier_rapport or not contraception or not preservatif or not partenaires or not age_premier_rapport or not acces_sante or not protection or not education or not frequence_sante:
                 st.warning("⚠️ Veuillez remplir tous les champs pour une meilleure analyse.")
-                
-            cursor.execute("""INSERT INTO reponses (age, sexe, sensibilisation, dernier_rapport, 
-                              contraception, mst, amelioration, ist, prevention, sexualite_precoce, 
-                              facteurs, risques, preservatif, partenaires, age_premier_rapport, 
-                              acces_sante, protection, education, difficultes, frequence_sante) 
-                              VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""",
-                          (age, sexe, sensibilisation, dernier_rapport, contraception, mst,
-                           amelioration, ist, prevention, sexualite_precoce, facteurs, risques,
-                           preservatif, partenaires, age_premier_rapport, acces_sante, protection,
-                           education, difficultes, frequence_sante))
             
-            conn.commit()
-            conn.close()
+            else:
+                conn = get_connection()
+                cursor = conn.cursor()
+                
+                
+                    
+                cursor.execute("""INSERT INTO reponses (age, sexe, sensibilisation, dernier_rapport, 
+                                contraception, mst, amelioration, ist, prevention, sexualite_precoce, 
+                                facteurs, risques, preservatif, partenaires, age_premier_rapport, 
+                                acces_sante, protection, education, difficultes, frequence_sante) 
+                                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""",
+                            (age, sexe, sensibilisation, dernier_rapport, contraception, mst,
+                            amelioration, ist, prevention, sexualite_precoce, facteurs, risques,
+                            preservatif, partenaires, age_premier_rapport, acces_sante, protection,
+                            education, difficultes, frequence_sante))
+                
+                conn.commit()
+                conn.close()
             
             st.success("✅ Merci ! Vos réponses ont été enregistrées avec succès !")
             st.balloons()
