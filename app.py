@@ -220,31 +220,6 @@ elif st.session_state.page == "Questionnaire":
             conn = get_connection()
             cursor = conn.cursor()
             
-            cursor.execute("""CREATE TABLE IF NOT EXISTS reponses (
-                              id INT AUTO_INCREMENT PRIMARY KEY,
-                              age VARCHAR(20),
-                              sexe VARCHAR(20),
-                              sensibilisation VARCHAR(10),
-                              dernier_rapport VARCHAR(50),
-                              contraception VARCHAR(20),
-                              mst TEXT,
-                              amelioration TEXT,
-                              ist VARCHAR(10),
-                              prevention TEXT,
-                              sexualite_precoce TEXT,
-                              facteurs TEXT,
-                              risques TEXT,
-                              preservatif VARCHAR(10), 
-                              partenaires VARCHAR(20),
-                              age_premier_rapport INT,
-                              acces_sante VARCHAR(10),
-                              protection VARCHAR(10),
-                              education VARCHAR(10),
-                              difficultes TEXT,
-                              frequence_sante VARCHAR(20),
-                              date_soumission TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                              )""")
-            
             cursor.execute("""INSERT INTO reponses (age, sexe, sensibilisation, dernier_rapport, 
                               contraception, mst, amelioration, ist, prevention, sexualite_precoce, 
                               facteurs, risques, preservatif, partenaires, age_premier_rapport, 
