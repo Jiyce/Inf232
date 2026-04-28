@@ -18,7 +18,7 @@ def exporter_csv():
 # Configuration de la page (DOIT être en premier)
 st.set_page_config(page_title="Questionnaire Santé Sexuelle", page_icon="📋")
 
-# CSS personnalisé (après set_page_config)
+# CSS personnalisé responsive (après set_page_config)
 st.markdown("""
 <style>
     /* Style principal - Fond bleu clair */
@@ -38,8 +38,9 @@ st.markdown("""
         color: white !important;
         border-radius: 8px;
         border: none;
-        padding: 10px 25px;
+        padding: 12px 25px;
         font-weight: 600;
+        font-size: 16px;
     }
     .stButton > button:hover {
         background-color: #1565c0 !important;
@@ -52,7 +53,7 @@ st.markdown("""
     
     /* Metrics - Bleu */
     [data-testid="stMetricValue"] {
-        font-size: 2.5rem !important;
+        font-size: 2rem !important;
         color: #1976d2 !important;
     }
     
@@ -61,11 +62,56 @@ st.markdown("""
         border-color: #1976d2;
     }
     
-    /* Formulaires */
+    /* Formulaires - responsive */
     .stTextInput > div > div > input,
     .stSelectbox > div > div > div,
     .stTextArea > div > div > textarea {
         border: 1px solid #1976d2 !important;
+        font-size: 16px !important;
+    }
+    
+    /* Labels plus visibles */
+    .stSelectbox label,
+    .stTextArea label,
+    .stNumberInput label {
+        font-size: 16px !important;
+        font-weight: 600 !important;
+    }
+    
+    /* Responsive pour mobile */
+    @media (max-width: 768px) {
+        .stApp {
+            padding: 10px;
+        }
+        h1 {
+            font-size: 24px !important;
+        }
+        h2, h3 {
+            font-size: 20px !important;
+        }
+        .stButton > button {
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+        }
+        [data-testid="stMetricValue"] {
+            font-size: 1.5rem !important;
+        }
+        /* Formulaire plus large sur mobile */
+        .stForm {
+            padding: 10px;
+        }
+    }
+    
+    /* Messages plus lisibles */
+    .stSuccess {
+        font-size: 16px !important;
+        padding: 15px !important;
+    }
+    
+    /* Stats infos */
+    .stInfo {
+        font-size: 16px !important;
     }
 </style>
 """, unsafe_allow_html=True)
