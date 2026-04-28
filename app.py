@@ -1,6 +1,11 @@
 import streamlit as st
 import psycopg2
+import os
+from dotenv import load_dotenv
 from datetime import datetime
+
+# Charger les variables d'environnement
+load_dotenv()
 
 # Configuration de la page (DOIT être en premier)
 st.set_page_config(page_title="Questionnaire Santé Sexuelle", page_icon="📋")
@@ -61,21 +66,13 @@ st.markdown("""
 @st.cache_resource
 def connexion_db():
     return psycopg2.connect(
-        host="aws-0-eu-west-1.pooler.supabase.com",
-        user="postgres.xjsjifpburqlrzhlhjho",
-        password="Flavimyfave!",
-        database="postgres",
-        port="6543",
-        sslmode="require"
+       os.getenv("DATABASE_URL"),
+        sslmode="require" 
     )
 
 def get_connection():
     return psycopg2.connect(
-        host="aws-0-eu-west-1.pooler.supabase.com",
-        user="postgres.xjsjifpburqlrzhlhjho",
-        password="Flavimyfave!",
-        database="postgres",
-        port="6543",
+       os.getenv("DATABASE_URL"),
         sslmode="require"
     )
 
