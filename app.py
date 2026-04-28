@@ -120,15 +120,28 @@ st.markdown("""
 @st.cache_resource
 def connexion_db():
     return psycopg2.connect(
-        os.getenv("DATABASE_URL"),
+        host=os.getenv("DB_HOST", "aws-0-eu-west-1.pooler.supabase.com"),
+        user=os.getenv("DB_USER", "postgres.xjsjifpburqlrzhlhjho"),
+        password=os.getenv("DB_PASSWORD", "Flavimyfave!"),
+        database=os.getenv("DB_NAME", "postgres"),
+        port=os.getenv("DB_PORT", "6543"),
         sslmode="require"
     )
 
 def get_connection():
-    return psycopg2.connect(
-       os.getenv("DATABASE_URL"),
-        sslmode="require"
-    )
+    # Essayer DATABASE_URL sinon paramètres individuels
+    db_url = os.getenv("DATABASE_URL")
+    if db_url:
+        return psycopg2.connect(db_url, sslmode="require")
+    else:
+        return psycopg2.connect(
+            host=os.getenv("DB_HOST", "aws-0-eu-west-1.pooler.supabase.com"),
+            user=os.getenv("DB_USER", "postgres.xjsjifpburqlrzhlhjho"),
+            password=os.getenv("DB_PASSWORD", "Flavimyfave!"),
+            database=os.getenv("DB_NAME", "postgres"),
+            port=os.getenv("DB_PORT", "6543"),
+            sslmode="require"
+        )
 
 # Initialiser l'état de la page
 if 'page' not in st.session_state:
