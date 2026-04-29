@@ -1,6 +1,7 @@
 import streamlit as st
 import psycopg2
 import os
+import pandas as pd
 import csv
 from datetime import datetime
 
@@ -24,6 +25,7 @@ st.markdown("""
     /* Style principal - Fond bleu clair */
     .stApp {
         background-color: #e3f2fd;
+        color:black !important;
     }
     
     /* Titres - Bleu foncé */
@@ -199,13 +201,13 @@ elif st.session_state.page == "Questionnaire":
         st.header("Opinions et Expériences")
         amelioration = st.text_area("Que pourrait-on améliorer dans la santé sexuelle ?")
         sexualite_precoce = st.text_area("Que pensez-vous de la sexualité précoce ?")
-        facteurs = st.text_area("Quels sont les facteurs de risque pour la santé sexuelle ?")
+        facteurs = st.text_area("Quelles pourraient être les causes d'une sexualité précoce ?")
         risques = st.text_area("Selon vous, quels sont les principaux risques ?")
         
         st.header("Accès aux Soins")
         partenaires = st.selectbox("Nombre de partenaires sexuels (12 derniers mois)", 
                                    ["0", "1", "2-3", "4-5", "Plus de 5"])
-        age_premier_rapport = st.number_input("Âge du premier rapport sexuel", min_value=0, max_value=100, value=18)
+        age_premier_rapport = st.number_input("Âge du premier rapport sexuel", min_value=0, max_value=100, value=None, placeholder="Laissez vide si vous ne souhaitez pas répondre")
         acces_sante = st.selectbox("Avez-vous facilement accès aux services de santé sexuelle ?", 
                                    ["Très facile", "Facile", "Difficile", "Très difficile"])
         protection = st.selectbox("Vous sentez-vous protégé(e) ?", ["Oui", "Non", "Parfois"])
@@ -217,14 +219,15 @@ elif st.session_state.page == "Questionnaire":
         submitted = st.form_submit_button("Soumettre")
         
         if submitted:
-            if not amelioration or not sexualite_precoce or not facteurs or not risques or not difficultes or not prevention or not mst or not ist or not age or not sexe or not sensibilisation or not dernier_rapport or not contraception or not preservatif or not partenaires or not age_premier_rapport or not acces_sante or not protection or not education or not frequence_sante:
+            if not amelioration or not sexualite_precoce or not facteurs or not risques or not difficultes or not prevention or not mst or not ist or not age or not sexe or not sensibilisation or not dernier_rapport or not contraception or not preservatif or not partenaires or not acces_sante or not protection or not education or not frequence_sante:
                 st.warning("⚠️ Veuillez remplir tous les champs pour une meilleure analyse.")
             
             else:
                 conn = get_connection()
                 cursor = conn.cursor()
                 
-                
+                if age_premier_rapport == 0:
+                    age_premier_rapport = None
                     
                 cursor.execute("""INSERT INTO reponses (age, sexe, sensibilisation, dernier_rapport, 
                                 contraception, mst, amelioration, ist, prevention, sexualite_precoce, 
@@ -268,7 +271,9 @@ elif st.session_state.page == "Statistiques":
         if resultats_sexe:
             sexes = [s[0] for s in resultats_sexe]
             counts = [c[1] for c in resultats_sexe]
-            st.bar_chart({"Sexe": dict(zip(sexes, counts))})
+            
+            df_sexe = pd.DataFrame({"Sexe": sexes, "Nombre": counts})
+            st.bar_chart(df_sexe.set_index("Sexe"))
         
         st.divider()
         
