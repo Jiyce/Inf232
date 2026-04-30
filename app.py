@@ -70,6 +70,7 @@ st.markdown("""
     .stTextArea > div > div > textarea {
         border: 1px solid #1976d2 !important;
         font-size: 16px !important;
+        color:black !important;
     }
     
     /* Labels plus visibles */
@@ -78,6 +79,7 @@ st.markdown("""
     .stNumberInput label {
         font-size: 16px !important;
         font-weight: 600 !important;
+        color:black !important;
     }
     
     /* Responsive pour mobile */
