@@ -79,7 +79,6 @@ st.markdown("""
     .stNumberInput label {
         font-size: 16px !important;
         font-weight: 600 !important;
-        color:black !important;
     }
     
     /* Responsive pour mobile */
