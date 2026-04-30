@@ -84,6 +84,7 @@ st.markdown("""
     @media (max-width: 768px) {
         .stApp {
             padding: 10px;
+            color:black !important;
         }
         h1 {
             font-size: 24px !important;
